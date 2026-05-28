@@ -56,5 +56,7 @@ async def shutdown():
 
 # Точка входа (если запускаем файл напрямую)
 if __name__ == "__main__":
-    import uvicorn
-    uvicorn.run(app, host="0.0.0.0", port=8000)
+    # Получаем порт из окружения, по умолчанию 8000 для локальной разработки
+    port = int(os.environ.get("PORT", 8000))
+    # Запускаем сервер на всех интерфейсах
+    uvicorn.run("main:app", host="0.0.0.0", port=port, reload=True)
